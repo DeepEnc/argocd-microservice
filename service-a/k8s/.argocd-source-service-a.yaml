@@ -1,0 +1,3 @@
+kustomize:
+  images:
+  - deepenc/service-a:0.1.4
