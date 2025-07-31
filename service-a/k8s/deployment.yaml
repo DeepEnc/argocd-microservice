@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: service-a
-        image: deepenc/service-a:latest
+        image: deepenc/service-a:0.1.1
         ports:
         - containerPort: 3000

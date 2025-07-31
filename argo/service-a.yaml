@@ -5,7 +5,9 @@ metadata:
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: deepenc/service-a
-    argocd-image-updater.argoproj.io/service-a.update-strategy: latest
+    argocd-image-updater.argoproj.io/service-a.update-strategy: semver
+    argocd-image-updater.argoproj.io/write-back-method: git
+
 spec:
   project: default
   source:
