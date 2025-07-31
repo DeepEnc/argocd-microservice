@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: service-b
-        image: deepenc/service-b:0.1.1
+        image: deepenc/service-b
         ports:
         - containerPort: 3000

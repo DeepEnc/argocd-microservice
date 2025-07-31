@@ -1,3 +1,7 @@
 resources:
   - deployment.yaml
   - service.yaml
+
+images:
+  - name: deepenc/service-a
+    newTag: 0.1.3
