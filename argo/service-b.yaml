@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: service-b
+  namespace: argocd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: deepenc/service-a
+    argocd-image-updater.argoproj.io/service-a.update-strategy: latest
+spec:
+  project: default
+  source:
+    repoURL: "https://github.com/DeepEnc/argocd-microservice"
+    targetRevision: "0.1-develop"
+    path: service-b/k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
