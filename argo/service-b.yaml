@@ -4,7 +4,7 @@ metadata:
   name: service-b
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: deepenc/service-a
+    argocd-image-updater.argoproj.io/image-list: deepenc/service-b
     argocd-image-updater.argoproj.io/service-a.update-strategy: latest
 spec:
   project: default
