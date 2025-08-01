@@ -10,7 +10,6 @@ metadata:
     argocd-image-updater.argoproj.io/write-back-target: kustomization
     argocd-image-updater.argoproj.io/git-commit-user: Argo Image Updater
     argocd-image-updater.argoproj.io/git-commit-email: sunilojha525@gmail.com
-
 spec:
   project: default
   source:
