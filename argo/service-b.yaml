@@ -4,7 +4,7 @@ metadata:
   name: service-b
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: deepenc/service-b
+    argocd-image-updater.argoproj.io/image-list: service-b=deepenc/service-b:~0.1
     argocd-image-updater.argoproj.io/service-a.update-strategy: semver
     argocd-image-updater.argoproj.io/write-back-method: git
     argocd-image-updater.argoproj.io/write-back-target: kustomization
