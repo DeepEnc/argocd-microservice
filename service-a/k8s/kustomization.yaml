@@ -3,4 +3,4 @@ resources:
   - service.yaml
 images:
   - name: deepenc/service-a
-    newTag: 0.1.12
+    newTag: 0.1.13
