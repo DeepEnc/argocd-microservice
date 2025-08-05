@@ -25,11 +25,9 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      # CRITICAL: These options help ArgoCD detect kustomization changes
       - CreateNamespace=true
       - ApplyOutOfSyncOnly=true
       - RespectIgnoreDifferences=false
-      # Force ArgoCD to replace resources instead of patching
       - Replace=true
     retry:
       limit: 5
