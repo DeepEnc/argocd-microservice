@@ -17,3 +17,6 @@ spec:
         image: deepenc/service-a:0.1.0
         ports:
         - containerPort: 3000
+        args:
+            - --loglevel=info
+            - --interval=1m
