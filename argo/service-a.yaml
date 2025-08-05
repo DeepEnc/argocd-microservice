@@ -11,6 +11,8 @@ metadata:
     argocd-image-updater.argoproj.io/write-back-target: kustomization
     argocd-image-updater.argoproj.io/git-commit-user: Argo Image Updater
     argocd-image-updater.argoproj.io/git-commit-email: sunilojha525@gmail.com
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: Prune=false
 spec:
   project: default
   source:
@@ -24,3 +26,16 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      # CRITICAL: These options help ArgoCD detect kustomization changes
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - RespectIgnoreDifferences=false
+      # Force ArgoCD to replace resources instead of patching
+      - Replace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
