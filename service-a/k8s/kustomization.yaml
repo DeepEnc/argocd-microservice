@@ -3,5 +3,4 @@ resources:
   - service.yaml
 images:
   - name: deepenc/service-a
-    newTag: stag-1.1.1
-    newName: deepenc/service-a
+    newTag: stag-1.2.3
