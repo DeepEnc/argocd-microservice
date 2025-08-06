@@ -7,10 +7,8 @@ metadata:
     # argocd-image-updater.argoproj.io/image-list: service-a=deepenc/service-a:~0.1
     # argocd-image-updater.argoproj.io/service-a.update-strategy: semver
     argocd-image-updater.argoproj.io/image-list: service-a=deepenc/service-a
-    # argocd-image-updater.argoproj.io/service-a.update-strategy: name
-    # argocd-image-updater.argoproj.io/service-a.allow-tags: regexp:^(stag|prod)-[0-9]+\.[0-9]+\.[0-9]+$
-    # argocd-image-updater.argoproj.io/service-a.kustomize.image-name: deepenc/service-a
-    argocd-image-updater.argoproj.io/service-a.update-strategy: latest
+    argocd-image-updater.argoproj.io/service-a.update-strategy: name
+    argocd-image-updater.argoproj.io/service-a.allow-tags: regexp:^(stag|prod)-[0-9]+\.[0-9]+\.[0-9]+$
     argocd-image-updater.argoproj.io/git-branch: 0.1-develop
     argocd-image-updater.argoproj.io/write-back-method: git
     argocd-image-updater.argoproj.io/write-back-target: kustomization
