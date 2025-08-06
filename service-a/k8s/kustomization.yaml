@@ -3,4 +3,4 @@ resources:
   - service.yaml
 images:
   - name: deepenc/service-a
-    newTag: stag-4.5.6
+    newTag: 4.5.6
