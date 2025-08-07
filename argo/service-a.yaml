@@ -12,6 +12,7 @@ metadata:
     argocd-image-updater.argoproj.io/git-branch: 0.1-develop
     argocd-image-updater.argoproj.io/write-back-method: git
     argocd-image-updater.argoproj.io/write-back-target: kustomization
+    # Below annonations are for clear Git commit history and needs verified commits under a specific user/email
     argocd-image-updater.argoproj.io/git-commit-user: Argo Image Updater
     argocd-image-updater.argoproj.io/git-commit-email: sunilojha525@gmail.com
 spec:
