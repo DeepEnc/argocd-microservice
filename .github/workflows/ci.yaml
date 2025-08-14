@@ -6,12 +6,38 @@ on:
       - 0.1-develop
 
 jobs:
-  build-and-push:
+  detect-changes:
     runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    outputs:
+      services: ${{ steps.set-services.outputs.services }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Detect changed services
+        id: set-services
+        run: |
+          # Get all changed files in service-a or service-b
+          CHANGED_SERVICES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} \
+            | grep '^service-[ab]/' \
+            | grep -v '/k8s/kustomization.yaml$' \
+            | cut -d/ -f1 | sort -u)
+
+          if [ -z "$CHANGED_SERVICES" ]; then
+            echo "No service code changes detected."
+            echo "services=[]" >> $GITHUB_OUTPUT
+          else
+            JSON_SERVICES=$(echo "$CHANGED_SERVICES" | jq -R -s -c 'split("\n")[:-1]')
+            echo "Changed services: $JSON_SERVICES"
+            echo "services=$JSON_SERVICES" >> $GITHUB_OUTPUT
+
+  build-and-push:
+    needs: detect-changes
+    runs-on: ubuntu-latest
+    if: needs.detect-changes.outputs.services != '[]' && !contains(github.event.head_commit.message, '[skip ci]')
     strategy:
       matrix:
-        service: [service-a, service-b]
+        service: ${{ fromJSON(needs.detect-changes.outputs.services) }}
 
     steps:
       - name: Checkout repository
