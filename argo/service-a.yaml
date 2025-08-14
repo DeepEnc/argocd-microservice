@@ -11,6 +11,7 @@ metadata:
     # argocd-image-updater.argoproj.io/service-a.allow-tags: regexp:^(stag|prod)-[0-9]+\.[0-9]+\.[0-9]+$
     argocd-image-updater.argoproj.io/git-branch: 0.1-develop
     argocd-image-updater.argoproj.io/write-back-method: git
+    argocd-image-updater.argoproj.io/git-commit-message: "chore: update image tags [skip ci]"
     argocd-image-updater.argoproj.io/write-back-target: kustomization
     # Below annonations are for clear Git commit history and needs verified commits under a specific user/email
     # These are optional, when not defined, argocd uses its default ones
