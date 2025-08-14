@@ -1,0 +1,45 @@
+name: CI - Build & Push Images
+
+on:
+  push:
+    branches:
+      - 0.1-develop
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [service-a, service-b]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Get latest tag from Docker Hub
+        id: get_version
+        run: |
+          IMAGE_NAME="deepenc/${{ matrix.service }}"
+          LATEST_TAG=$(curl -s "https://hub.docker.com/v2/repositories/$IMAGE_NAME/tags?page_size=1&page=1&ordering=last_updated" \
+            | jq -r '.results[0].name' || echo "0.0.0")
+          
+          echo "Latest tag: $LATEST_TAG"
+          
+          # Extract version numbers
+          IFS='.' read -r major minor patch <<< "${LATEST_TAG:-0.0.0}"
+          patch=$((patch+1))
+          NEW_TAG="$major.$minor.$patch"
+          
+          echo "NEW_TAG=$NEW_TAG" >> $GITHUB_ENV
+          echo "New tag: $NEW_TAG"
+
+      - name: Build and push image
+        run: |
+          IMAGE_NAME="deepenc/${{ matrix.service }}"
+          docker build -t "$IMAGE_NAME:${NEW_TAG}" "./${{ matrix.service }}"
+          docker push "$IMAGE_NAME:${NEW_TAG}"
